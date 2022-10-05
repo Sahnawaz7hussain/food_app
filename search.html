@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link rel="stylesheet" href="./styles/navbar.css">
+    <link rel="stylesheet" href="./styles/search.css">
+    <style>
+      
+    </style>
+</head>
+<body>
+    <div id="navbar"></div>
+    <h1>Search Here</h1>
+       <!-- <input id="query" oninput="getData()"> -->
+       <input type="text" id="query" oninput="de_bouncing(main,1000)" placeholder="Enter your favorite Dish">
+       <div id="inputBox"></div>
+       <div id="display"></div>
+</body>
+</html>
+
+<script type="module">
+ import nav from "./components/navbar.js";
+ document.getElementById("navbar").innerHTML=nav()
+
+</script>
+
+
+<script>
+
+    let id;
+  let myFunction = async (q)=> {
+    
+      let url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${q}`;
+   //  let url = `www.themealdb.com/api/json/v1/1/search.php?f=${q}`
+     let res = await fetch(url);
+      let data = await res.json()
+       data = data.meals
+
+      return data
+    
+  
+    }
+  let main = async() =>{
+  var q = document.getElementById("query").value;
+  let getData = await myFunction(q)
+   append(getData)
+// console.log(getData)
+  }
+
+   let de_bouncing = (func,delay) => {
+       if(id){
+           clearTimeout(id)
+       }
+      id = setTimeout(function(){
+          func()
+      },delay)
+
+   }
+
+   let cont = document.getElementById("display")
+    let inputBox = document.getElementById("inputBox")
+  let append = (data)=>{
+      cont.innerHTML=""
+     inputBox.innerHTML=null;
+      data.forEach(({strMeal,strMealThumb})=>{
+ 
+       let obj ={
+        name:strMeal,
+        img:strMealThumb
+       }
+       //console.log(obj)
+      
+          let name = document.createElement("p");
+          name.innerText=strMeal;
+          name.addEventListener("click",function(){
+            cardFun(obj)
+          })
+    
+        
+           
+          inputBox.append(name)
+        
+      })
+  }
+
+let cardFun = (data) =>{
+  cont.innerHTML=""
+     let card = document.createElement("div");
+      card.setAttribute("class","card")
+       let img = document.createElement("img");
+      img.src=data.img;
+        let name = document.createElement("p");
+          name.innerText=data.name;
+           card.append(name,img)
+           cont.append(card)
+  console.log(data)
+}
+
+
+
+</script>

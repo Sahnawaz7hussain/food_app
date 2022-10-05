@@ -1,0 +1,17 @@
+*{
+    margin: 0px;padding:0px;
+}
+form{
+    height:200px;width:30%;border: 2px solid black;background-color: brown;
+    display: block;margin: auto;
+}
+input{
+    height:30px;width:80%;
+   
+    display: block;margin: auto;
+    margin-top: 25px;
+}
+button{
+    display: block;margin: auto;
+    margin-top: 20px;
+}

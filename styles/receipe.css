@@ -1,0 +1,38 @@
+
+*{
+    margin:0px;
+    padding:0px;
+   
+}
+
+h1{
+    color:red;
+    text-align: center;
+}
+#container{
+    display: block;
+    margin: auto;
+     background-color: brown;
+     height:400px;
+     width:80%;
+     display: flex;
+     border:3px solid black;
+}
+#container>div:nth-child(1){
+    height:100%;
+    width:50%;
+    border:1px solid blue;
+}
+
+
+#container>div>img{
+    width:100%;
+    height: 100%;
+}
+p{
+    font-size: 30px;
+    margin-top: 20px;
+    color:white;
+    display: block;
+    margin-left: 25px;
+}
